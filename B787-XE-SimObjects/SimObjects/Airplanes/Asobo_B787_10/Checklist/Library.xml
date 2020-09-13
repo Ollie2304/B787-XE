@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SimBase.Document Type="CheckpointLibrary" version="1,0">
+	<Checklist.CheckpointLibrary>
+
+
+    <Checkpoint Id="RIGHT_ENGINE_START_IGNITION_SWITCH_START">
+    <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_RIGHT_ENGINE_START_IGNITION_SWITCH" ExpectationTT="TT:GAME.CHECKLIST_START"/>
+    <Clue name="TT:CLUE.RIGHT_ENGINE_START_IGNITION_SWITCH_START"/>
+    <Test>
+      <TestValue>
+        <Operator OpType="AND">
+          <Operator OpType="EQUAL">
+            <Val SimVarName="TURB ENG IGNITION SWITCH EX1:2" Units="Enum"/>
+            <Val Value="1"/>
+          </Operator>
+          <Val SimVarName="GENERAL ENG STARTER:2" Units="boolean"/>
+        </Operator>
+      </TestValue>
+      <Instrument Id="ENGINE_SWITCH_STARTER2"/>
+      <Action Copilot="True" Condition="TestValueFalse" Once="true"	Code="1 (&gt;K:TURBINE_IGNITION_SWITCH_SET2)"/>
+      <Action Copilot="True" Condition="TestValueFalse" Once="true" EventID="TOGGLE_STARTER2"/>
+    </Test>
+    </Checkpoint>
+
+    
+
+    <Checkpoint Id="RIGHT_ENGINE_FUEL_CONTROL_SWITCH_RUN">
+      <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_RIGHT_ENGINE_FUEL_CONTROL_SWITCH" ExpectationTT="TT:GAME.CHECKLIST_RUN"/>
+      <Clue name="TT:CLUE.RIGHT_ENGINE_FUEL_CONTROL_SWITCH_RUN"/>
+      <Test>
+        <TestValue>
+          <Val SimVarName="FUELSYSTEM VALVE SWITCH:2" Units="boolean"/>
+        </TestValue>
+        <Action Copilot="True" Condition="TestValueFalse" Once="true" EventID="FUELSYSTEM_VALVE_OPEN" EventParam="2"/>
+        <Instrument Id="FUEL_SWITCH_VALVE2"/>
+      </Test>
+    </Checkpoint>
+    
+    
+    
+
+    <Checkpoint Id="LEFT_ENGINE_START_REPEAT_PROCEDURE_787">
+      <Clue name="TT:CLUE.LEFT_ENGINE_START_REPEAT_PROCEDURE"/>
+      <Feedback name="TT:FEEDBACK.OPPOSITE_ENGINE_START_REPEAT_PROCEDURE"/>
+      <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_LEFT_ENGINE_START" ExpectationTT="TT:GAME.CHECKLIST_REPEAT_PROCEDURE"/>
+      <Sequence SeqType="Ordered">
+        <Test>
+        <TestValue>
+          <Operator OpType="AND">
+            <Operator OpType="EQUAL">
+              <Val SimVarName="TURB ENG IGNITION SWITCH EX1:1" Units="Enum"/>
+              <Val Value="1"/>
+            </Operator>
+            <Val SimVarName="GENERAL ENG STARTER:1" Units="boolean"/>
+          </Operator>
+        </TestValue>
+        <Instrument Id="ENGINE_SWITCH_STARTER1"/>
+        <Action Copilot="True" Condition="TestValueFalse" Once="true"	Code="1 (&gt;K:TURBINE_IGNITION_SWITCH_SET1)"/>
+        <Action Copilot="True" Condition="TestValueFalse" Once="true" EventID="TOGGLE_STARTER1"/>
+      </Test>
+      <Test>
+        <TestValue>
+          <Val SimVarName="FUELSYSTEM VALVE SWITCH:1" Units="boolean"/>
+        </TestValue>
+        <Action Copilot="True" Condition="TestValueFalse" Once="true" EventID="FUELSYSTEM_VALVE_OPEN" EventParam="1"/>
+        <Instrument Id="FUEL_SWITCH_VALVE1"/>
+      </Test>
+      </Sequence>
+    </Checkpoint>
+
+
+
+
+
+  </Checklist.CheckpointLibrary>
+</SimBase.Document>

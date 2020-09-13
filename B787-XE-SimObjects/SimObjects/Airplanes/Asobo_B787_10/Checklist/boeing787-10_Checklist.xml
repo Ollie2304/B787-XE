@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<SimBase.Document Type="Checklist" version="1,0">
+	<Checklist.Checklist>
+		<IncludeCheckpointLibrary FileName="CheckpointsLibrary\\Asobo_DefaultCheckpointLibrary.xml"/>
+    <IncludeCheckpointLibrary FileName="SimObjects\\Airplanes\\Asobo_B787_10\\Checklist\\Library.xml"/>
+
+    <Step ChecklistStepId="PREFLIGHT_GATE">
+
+
+      <!-- Before starting engine -->
+      <Page SubjectTT="TT:GAME.CHECKLIST_BEFORE_STARTING_ENGINE">
+        <Checkpoint ReferenceId="Battery_Switch_On"/>
+        <Checkpoint ReferenceId="External_Power_On_If_Avail"/>
+        <Checkpoint ReferenceId="APU_START_ON_BOEING">
+          <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_APU_SELECTOR" ExpectationTT="TT:GAME.CHECKLIST_START_THEN_ON"/>
+          <Clue name="TT:CLUE.APU_SELECTOR_START_THEN_ON"/>
+        </Checkpoint>
+        <Checkpoint ReferenceId="APU_Gen_Switches_On_When_Avail_Lit">
+          <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_APU_GEN_SWITCHES" ExpectationTT="TT:GAME.CHECKLIST_ON_WHEN_APU_AVAIL"/>
+          <Clue name="TT:CLUE.APU_GEN_APU_AVAIL"/>
+        </Checkpoint>
+			  <Checkpoint ReferenceId="EXTERNAL_POWER_OFF"/> <!-- custom addition, line not in default -->
+        <Checkpoint ReferenceId="FUEL_PUMPS_AIRLINER_2_ENGINES"/>
+        <Checkpoint ReferenceId="Beacon_Light_On"/>
+      </Page>
+
+
+      <!-- Starting Engine -->
+      <Page SubjectTT="TT:GAME.CHECKLIST_STARTING_ENGINE">
+        <Checkpoint ReferenceId="POWER_LEVERS_IDLE_2ENGINES">
+          <CheckpointDesc SubjectTT="TT:GAME.CHECKLIST_THRUST_LEVERS" ExpectationTT="TT:GAME.CHECKLIST_IDLE"/>
+          <Clue name="TT:CLUE.THRUST_LEVERS_IDLE"/>
+        </Checkpoint>
+        <Checkpoint ReferenceId="RIGHT_ENGINE_START_IGNITION_SWITCH_START"/>
+        <Checkpoint ReferenceId="RIGHT_ENGINE_FUEL_CONTROL_SWITCH_RUN"/>
+        <Checkpoint ReferenceId="EICAS_Monitor">
+			<ForceCamera name ="Instrument01"/>
+		</Checkpoint>
+        <Checkpoint ReferenceId="LEFT_ENGINE_START_REPEAT_PROCEDURE_787"/>
+      </Page>
+
+
+
+      <!-- After starting engine 1/2 -->
+      <Page SubjectTT="TT:GAME.CHECKLIST_AFTER_STARTING_ENGINE_1">
+        <Checkpoint ReferenceId="APU_SELECTOR_OFF"/>
+        <Checkpoint ReferenceId="LIGHTS_AS_REQUIRED_AIRLINER"/>
+      </Page>
+
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<!-- **BEGINNING OF 78X EDITS - THEORIGINALBABU** -->
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+			<Page SubjectTT="TT:GAME.CHECKLIST_SHUTDOWN">
+        <Checkpoint ReferenceId="External_Power_On_If_Avail"/>
+				<Checkpoint ReferenceId="Fuel_Control_Switches_Cutoff"/>
+				<Checkpoint ReferenceId="Beacon_Light_Off"/>
+			</Page>
+
+    </Step>
+
+      </Checklist.Checklist>
+
+</SimBase.Document>
